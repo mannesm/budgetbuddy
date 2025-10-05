@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: src/budgetbuddy/db/Dockerfile # 👈 path to Dockerfile
+    container_name: budgetbuddy_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: budgetbuddy
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
