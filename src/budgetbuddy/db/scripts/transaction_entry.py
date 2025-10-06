@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from sqlalchemy.orm import Session
 
-from src.budgetbuddy.db.models.transactions import Transaction
+from src.budgetbuddy.db.schema.transactions import Transaction
 from src.budgetbuddy.db.session import SessionLocal
 
 

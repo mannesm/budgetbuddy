@@ -1,7 +1,7 @@
 from bunq.sdk.context.api_context import ApiContext
 from bunq.sdk.context.bunq_context import BunqContext
 
-api_context = ApiContext.restore("bunq_api_context.conf")
-BunqContext.load_api_context(api_context)
+CONF_PATH = "/Users/mannes/setting_files/bunq_api_context.conf"
 
-1
+api_context = ApiContext.restore(CONF_PATH)
+BunqContext.load_api_context(api_context)

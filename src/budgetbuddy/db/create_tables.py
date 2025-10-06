@@ -1,9 +1,9 @@
 from sqlalchemy import text
 
-from src.budgetbuddy.db.base import DEFAULT_SCHEMA, Base
+from src.budgetbuddy.db.schema.base import DEFAULT_SCHEMA, Base
 
 # Import models to ensure they are registered with the Base metadata
-from src.budgetbuddy.db.models.transactions import Transaction  # noqa: F401
+from src.budgetbuddy.db.schema.transactions import Transaction  # noqa: F401
 from src.budgetbuddy.db.session import engine
 
 

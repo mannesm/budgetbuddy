@@ -1,7 +1,7 @@
 from sqlalchemy import Float, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.budgetbuddy.db.base import ModelBase
+from src.budgetbuddy.db.schema.base import ModelBase
 
 
 class TransactionColumnsMixin:
@@ -12,4 +12,3 @@ class TransactionColumnsMixin:
 
 class Transaction(ModelBase, TransactionColumnsMixin):
     __tablename__ = "transactions"
-    # All columns are contributed by bases in desired order

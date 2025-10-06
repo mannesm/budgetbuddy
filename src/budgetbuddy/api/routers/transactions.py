@@ -12,8 +12,8 @@ from src.budgetbuddy.api.schemas.transactions import (
     TransactionRead,
     TransactionUpdate,
 )
-from src.budgetbuddy.db.models.transactions import Transaction
 from src.budgetbuddy.db.repository.base import CRUDRepository
+from src.budgetbuddy.db.schema.transactions import Transaction
 
 router = APIRouter(prefix="/transactions", tags=["transactions"])
 repo = CRUDRepository[Transaction](Transaction)
