@@ -1,28 +1,25 @@
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
 from src.budgetbuddy.api.deps import get_db
-from src.budgetbuddy.api.schemas.transactions import (
+from src.budgetbuddy.api.schemas.transaction import (
     TransactionCreate,
     TransactionRead,
     TransactionUpdate,
 )
 from src.budgetbuddy.db.repository.base import CRUDRepository
-from src.budgetbuddy.db.schema.transactions import Transaction
+from src.budgetbuddy.db.schema.transaction import Transaction
 
 router = APIRouter(prefix="/transactions", tags=["transactions"])
 repo = CRUDRepository[Transaction](Transaction)
 
 
 @router.post("/", response_model=TransactionRead, status_code=status.HTTP_201_CREATED)
-def create_transaction(
-    payload: TransactionCreate, db: Session = Depends(get_db)
-) -> Transaction:
+def create_transaction(payload: TransactionCreate, db: Session = Depends(get_db)) -> Transaction:
     return repo.create(db, payload.model_dump())
 
 
@@ -39,21 +36,15 @@ def list_transactions(
 def get_transaction(itemid: UUID, db: Session = Depends(get_db)) -> Transaction:
     tx = repo.get(db, itemid)
     if not tx:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Transaction not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Transaction not found")
     return tx
 
 
 @router.patch("/{itemid}", response_model=TransactionRead)
-def update_transaction(
-    itemid: UUID, payload: TransactionUpdate, db: Session = Depends(get_db)
-) -> Transaction:
+def update_transaction(itemid: UUID, payload: TransactionUpdate, db: Session = Depends(get_db)) -> Transaction:
     tx = repo.get(db, itemid)
     if not tx:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Transaction not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Transaction not found")
     data = {k: v for k, v in payload.model_dump().items() if v is not None}
     return repo.update(db, tx, data)
 
@@ -62,8 +53,6 @@ def update_transaction(
 def delete_transaction(itemid: UUID, db: Session = Depends(get_db)) -> None:
     tx = repo.get(db, itemid)
     if not tx:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Transaction not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Transaction not found")
     repo.delete(db, tx)
     return None

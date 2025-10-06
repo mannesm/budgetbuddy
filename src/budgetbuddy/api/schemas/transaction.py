@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Optional
 from uuid import UUID
 
 from pydantic import BaseModel, Field
@@ -10,7 +9,7 @@ from pydantic import BaseModel, Field
 class TransactionBase(BaseModel):
     amount: float = Field(..., gt=0)
     currency: str
-    description: Optional[str] = None
+    description: str | None = None
 
 
 class TransactionCreate(TransactionBase):
@@ -18,9 +17,9 @@ class TransactionCreate(TransactionBase):
 
 
 class TransactionUpdate(BaseModel):
-    amount: Optional[float] = Field(None, gt=0)
-    currency: Optional[str] = None
-    description: Optional[str] = None
+    amount: float | None = Field(None, gt=0)
+    currency: str | None = None
+    description: str | None = None
 
 
 class TransactionRead(BaseModel):
@@ -29,7 +28,7 @@ class TransactionRead(BaseModel):
     updatedtimestamp: datetime
     amount: float
     currency: str
-    description: Optional[str] = None
+    description: str | None = None
 
     class Config:
         from_attributes = True

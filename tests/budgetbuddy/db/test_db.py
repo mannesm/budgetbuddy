@@ -1,19 +1,18 @@
-from sqlalchemy import StaticPool, create_engine
-from sqlalchemy.orm import sessionmaker
+"""
+Test database configuration helpers.
 
-# I have created a seperate Postgress test database named budgetbuddy_test
-# Update the connection string as per your test database configuration
+Use the fixtures in tests/budgetbuddy/conftest.py for engine/session and FastAPI client.
+This module only documents the recommended TEST_DATABASE_URL shape and schema name.
+"""
 
-TEST_DATABASE_URL = (
-    "postgresql+psycopg2://postgres:password@localhost:5432/budgetbuddy_test"
+import os
+
+# Name your test database distinctly from dev/prod
+TEST_DB_NAME = os.getenv("TEST_DB_NAME", "budgetbuddy_test")
+TEST_SCHEMA = os.getenv("TEST_SCHEMA", "budgetbuddy")
+
+# Example DSN. You can override via env var TEST_DATABASE_URL.
+TEST_DATABASE_URL = os.getenv(
+    "TEST_DATABASE_URL",
+    f"postgresql+psycopg2://postgres:password@localhost:5432/{TEST_DB_NAME}",
 )
-TEST_DB_NAME = "budgetbuddy_test"
-TEST_SCHEMA = "test_schema"
-
-TEST_ENGINE = create_engine(
-    TEST_DATABASE_URL,
-    connect_args={"options": f"-csearch_path={TEST_SCHEMA}"},
-    poolclass=StaticPool,
-)
-
-TestSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=TEST_ENGINE)

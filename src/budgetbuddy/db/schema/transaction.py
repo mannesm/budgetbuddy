@@ -1,6 +1,5 @@
 from sqlalchemy import Float, String
 from sqlalchemy.orm import Mapped, mapped_column
-
 from src.budgetbuddy.db.schema.base import ModelBase
 
 

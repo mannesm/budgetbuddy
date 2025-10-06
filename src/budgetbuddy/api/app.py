@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 from fastapi import FastAPI
-
-from src.budgetbuddy.api.routers.transactions import router as transactions_router
+from src.budgetbuddy.api.routers.transaction import router as transactions_router
 
 app = FastAPI(title="BudgetBuddy API")
 

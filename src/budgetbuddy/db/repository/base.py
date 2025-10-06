@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Any, Generic, Iterable, Optional, Sequence, TypeVar
+from collections.abc import Iterable, Sequence
+from typing import Any, TypeVar
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -8,11 +9,11 @@ from sqlalchemy.orm import Session
 T = TypeVar("T")
 
 
-class CRUDRepository(Generic[T]):
+class CRUDRepository[T]:
     def __init__(self, model: type[T]):
         self.model = model
 
-    def get(self, db: Session, itemid: Any) -> Optional[T]:
+    def get(self, db: Session, itemid: Any) -> T | None:
         return db.get(self.model, itemid)
 
     def list(self, db: Session, *, offset: int = 0, limit: int = 100) -> Sequence[T]:
@@ -26,9 +27,7 @@ class CRUDRepository(Generic[T]):
         db.refresh(db_obj)
         return db_obj
 
-    def create_many(
-        self, db: Session, objs_in: Iterable[dict[str, Any]]
-    ) -> Sequence[T]:
+    def create_many(self, db: Session, objs_in: Iterable[dict[str, Any]]) -> Sequence[T]:
         db_objs = [self.model(**data) for data in objs_in]
         db.add_all(db_objs)
         db.commit()

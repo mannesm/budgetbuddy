@@ -1,13 +1,12 @@
 import logging
 import sys
 
+
 def get_logger(name: str) -> logging.Logger:
     logger = logging.getLogger(name)
     if not logger.handlers:
         handler = logging.StreamHandler(sys.stdout)
-        formatter = logging.Formatter(
-            '%(asctime)s %(levelname)s [%(name)s]: %(message)s'
-        )
+        formatter = logging.Formatter("%(asctime)s %(levelname)s [%(name)s]: %(message)s")
         handler.setFormatter(formatter)
         logger.addHandler(handler)
         logger.setLevel(logging.INFO)
@@ -17,4 +16,4 @@ def get_logger(name: str) -> logging.Logger:
 logger = get_logger(__name__)
 
 logger.setLevel(logging.INFO)
-logger.info('This is a test log')
+logger.info("This is a test log")

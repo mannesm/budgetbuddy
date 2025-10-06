@@ -1,8 +1,7 @@
-from typing import Any, Dict
+from typing import Any
 
 from sqlalchemy import MetaData, inspect
 from sqlalchemy.orm import DeclarativeBase, declared_attr
-
 from src.budgetbuddy.db.config import NAMING_CONVENTION
 from src.budgetbuddy.db.mixins.timestamp import TimestampMixin
 from src.budgetbuddy.db.mixins.uuid_pk import UUIDPrimaryKeyMixin
@@ -28,7 +27,7 @@ class Base(DeclarativeBase):
         return f"<{self.__class__.__name__} {' '.join(cols)}>"
 
     # 4) Handy serializer for quick debugging / JSON responses
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         insp = inspect(self).mapper.column_attrs
         return {attr.key: getattr(self, attr.key) for attr in insp}
 
