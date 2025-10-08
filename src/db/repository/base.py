@@ -35,7 +35,8 @@ class CRUDRepository[T]:
             db.refresh(o)
         return db_objs
 
-    def update(self, db: Session, db_obj: T, obj_in: dict[str, Any]) -> T:
+    @staticmethod
+    def update(db: Session, db_obj: T, obj_in: dict[str, Any]) -> T:
         for k, v in obj_in.items():
             setattr(db_obj, k, v)
         db.add(db_obj)
@@ -43,6 +44,7 @@ class CRUDRepository[T]:
         db.refresh(db_obj)
         return db_obj
 
-    def delete(self, db: Session, db_obj: T) -> None:
+    @staticmethod
+    def delete(db: Session, db_obj: T) -> None:
         db.delete(db_obj)
         db.commit()

@@ -5,8 +5,8 @@ import pytest
 from sqlalchemy import inspect
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from src.budgetbuddy.db.repository.base import CRUDRepository
-from src.budgetbuddy.db.schema.base import DEFAULT_SCHEMA, Base
+from src.db.repository.base import CRUDRepository
+from src.db.schema.base import DEFAULT_SCHEMA, Base
 
 
 def _dummy_value_for_column(col):

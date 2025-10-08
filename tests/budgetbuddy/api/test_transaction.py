@@ -2,7 +2,7 @@
 #
 # from fastapi.testclient import TestClient
 #
-# from src.budgetbuddy.api.routers import transaction
+# from src.budgetbuddy.api.router import transaction
 # from src.budgetbuddy.api.app import app
 # from src.budgetbuddy.services.transaction_service import Transaction
 #

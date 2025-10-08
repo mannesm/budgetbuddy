@@ -2,9 +2,9 @@ from typing import Any
 
 from sqlalchemy import MetaData, inspect
 from sqlalchemy.orm import DeclarativeBase, declared_attr
-from src.budgetbuddy.db.config import NAMING_CONVENTION
-from src.budgetbuddy.db.mixins.timestamp import TimestampMixin
-from src.budgetbuddy.db.mixins.uuid_pk import UUIDPrimaryKeyMixin
+from src.db.config import NAMING_CONVENTION
+from src.db.mixins.timestamp import TimestampMixin
+from src.db.mixins.uuid_pk import UUIDPrimaryKeyMixin
 
 DEFAULT_SCHEMA = "budgetbuddy"
 

@@ -4,7 +4,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: src/budgetbuddy/db/Dockerfile # 👈 path to Dockerfile
+      dockerfile: src/db/Dockerfile # 👈 path to Dockerfile
     container_name: budgetbuddy_db
     environment:
       POSTGRES_USER: postgres

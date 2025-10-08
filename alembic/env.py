@@ -13,11 +13,14 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.budgetbuddy.db.config import settings  # noqa: E402
-from src.budgetbuddy.db.schema.base import DEFAULT_SCHEMA, Base  # noqa: E402
+from src.db import (  # noqa: E402
+    DEFAULT_SCHEMA,
+    Base,
+    settings,  # noqa: E402
+)
 
 # Import models so they are registered with Base.metadata for autogeneration
-from src.budgetbuddy.db.schema.transaction import Transaction  # noqa: F401, E402
+from src.db.schema.transaction import Transaction  # noqa: F401, E402
 
 # this is the Alembic Config object, which provides access to values within the .ini file in use.
 config = alembic_context.config

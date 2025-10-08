@@ -2,6 +2,6 @@
 Import all models here so that Base.metadata.create_all() picks them up.
 """
 
-from src.budgetbuddy.db.schema.transaction import Transaction
+from src.db.schema.transaction import Transaction
 
 __all__ = ["Transaction"]

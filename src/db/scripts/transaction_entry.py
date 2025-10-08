@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from sqlalchemy.orm import Session
-from src.budgetbuddy.db.schema.transaction import Transaction
-from src.budgetbuddy.db.session import SessionLocal
+from src.db.schema.transaction import Transaction
+from src.db.session import SessionLocal
 
 
 def run_demo() -> None:

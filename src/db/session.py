@@ -1,7 +1,7 @@
 # Centralized SQLAlchemy engine and session factory
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.budgetbuddy.db.config import DATABASE_URL, settings
+from src.db.config import DATABASE_URL, settings
 
 # Create the engine once and reuse it
 engine = create_engine(

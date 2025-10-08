@@ -6,13 +6,13 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from src.budgetbuddy.api.deps import get_db
-from src.budgetbuddy.api.schemas.transaction import (
+from src.budgetbuddy.schemas.transaction import (
     TransactionCreate,
     TransactionRead,
     TransactionUpdate,
 )
-from src.budgetbuddy.db.repository.base import CRUDRepository
-from src.budgetbuddy.db.schema.transaction import Transaction
+from src.db import Transaction
+from src.db.repository.base import CRUDRepository
 
 router = APIRouter(prefix="/transactions", tags=["transactions"])
 repo = CRUDRepository[Transaction](Transaction)
