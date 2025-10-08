@@ -3,7 +3,7 @@
 from datetime import UTC, datetime
 
 import pytest
-from src.budgetbuddy.schemas.transaction import TransactionCreate, TransactionUpdate
+from src.budgetbuddy.banking.schemas.transaction import TransactionCreate, TransactionUpdate
 from src.budgetbuddy.services.transaction_service import (
     create_transaction,
     create_transactions_bulk,

@@ -5,7 +5,7 @@ from uuid import uuid4
 
 import pytest
 from pydantic import ValidationError
-from src.budgetbuddy.schemas.transaction import (
+from src.budgetbuddy.banking.schemas.transaction import (
     TransactionCreate,
     TransactionRead,
     TransactionUpdate,

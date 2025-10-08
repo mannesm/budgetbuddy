@@ -4,7 +4,7 @@ from datetime import datetime
 
 import pytest
 from src.budgetbuddy.banking.bunq.adapter import BunqPaymentAdapter
-from src.budgetbuddy.schemas.transaction import TransactionCreate
+from src.budgetbuddy.banking.schemas.transaction import TransactionCreate
 
 
 @pytest.mark.unit

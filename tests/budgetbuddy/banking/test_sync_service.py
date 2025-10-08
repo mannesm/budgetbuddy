@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 from src.budgetbuddy.banking.bunq.sync_service import BunqSyncService
-from src.budgetbuddy.schemas.transaction import TransactionCreate
+from src.budgetbuddy.banking.schemas.transaction import TransactionCreate
 
 
 @pytest.mark.integration

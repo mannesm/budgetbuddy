@@ -2,7 +2,8 @@
 
 from bunq.sdk.model.generated.endpoint import PaymentApiObject
 from pydantic import BaseModel
-from src.budgetbuddy.schemas.transaction import TransactionCreate
+
+from src.budgetbuddy.banking.schemas.transaction import TransactionCreate
 
 
 class BunqPaymentAdapter(BaseModel):

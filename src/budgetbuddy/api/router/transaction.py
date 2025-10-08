@@ -8,8 +8,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+
 from src.budgetbuddy.api.deps import get_db
-from src.budgetbuddy.schemas.transaction import (
+from src.budgetbuddy.banking.schemas.transaction import (
     TransactionCreate,
     TransactionRead,
     TransactionUpdate,

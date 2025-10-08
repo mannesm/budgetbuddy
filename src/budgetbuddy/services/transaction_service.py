@@ -8,7 +8,8 @@ from datetime import datetime
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
-from src.budgetbuddy.schemas.transaction import TransactionCreate, TransactionUpdate
+
+from src.budgetbuddy.banking.schemas.transaction import TransactionCreate, TransactionUpdate
 from src.common.log.logger import get_logger
 from src.db.repository.base import CRUDRepository
 from src.db.schema.transaction import Transaction

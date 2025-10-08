@@ -1,5 +1,5 @@
 from src.budgetbuddy.banking.bunq.fetch import fetch_all_payments
-from src.budgetbuddy.schemas.transaction import BunqPayment
+from src.budgetbuddy.banking.schemas.transaction import BunqPayment
 from src.budgetbuddy.services.transaction_service import create_transaction
 from src.common.log.logger import get_logger
 from src.db import SessionLocal
