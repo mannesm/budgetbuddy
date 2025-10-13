@@ -1,49 +1,42 @@
-import logging
 import os
-import sys
-from logging.handlers import RotatingFileHandler
 
 from dotenv import load_dotenv
+from loguru import logger as loguru_logger
 
 load_dotenv()
 
+DEFAULT_LOGGER_FORMAT = (
+    "<green>{time:YYYY-MM-DD HH:mm:ss}</green> <level>{level: <8}</level> [{extra[name]}]: <level>{message}</level>\n"
+)
 
-def get_logger(name: str) -> logging.Logger:
-    """Get a configured logger instance.
 
-    Configures logging based on environment variables. Supports logging
-    to console and/or file with rotation.
+def get_logger(name: str = None):
+    """Get a configured Loguru logger instance."""
+    log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+    log_to_file = os.getenv("LOG_TO_FILE", "false").lower() == "true"
+    log_file_path = os.getenv("LOG_FILE_PATH", "app.log")
+    loguru_logger.remove()
 
-    Args:
-        name (str): Name of the logger.
+    loguru_logger.add(
+        sink=lambda msg: print(msg, end=""),
+        level=log_level,
+        format=DEFAULT_LOGGER_FORMAT,
+        enqueue=True,
+        backtrace=True,
+        diagnose=True,
+    )
 
-    Returns:
-        logging.Logger: Configured logger instance.
+    if log_to_file:
+        loguru_logger.add(
+            log_file_path,
+            rotation="5 MB",
+            retention=3,
+            level=log_level,
+            format="{time:YYYY-MM-DD HH:mm:ss} {level: <8} [{extra[name]}]: {message}",
+            enqueue=True,
+            backtrace=True,
+            diagnose=True,
+        )
 
-    Example:
-        ```python
-        logger = get_logger(__name__)
-        logger.info("Hello, world!")
-        ```
-    """
-    logger = logging.getLogger(name)
-    if not logger.handlers:
-        log_level = os.getenv("LOG_LEVEL", "INFO").upper()
-        log_to_file = os.getenv("LOG_TO_FILE", "false").lower() == "true"
-        log_file_path = os.getenv("LOG_FILE_PATH", "app.log")
-
-        formatter = logging.Formatter("%(asctime)s %(levelname)s [%(name)s]: %(message)s")
-
-        stream_handler = logging.StreamHandler(sys.stdout)
-        stream_handler.setFormatter(formatter)
-        logger.addHandler(stream_handler)
-
-        if log_to_file:
-            file_handler = RotatingFileHandler(log_file_path, maxBytes=5 * 1024 * 1024, backupCount=3)
-            file_handler.setFormatter(formatter)
-            logger.addHandler(file_handler)
-
-        logger.setLevel(getattr(logging, log_level, logging.INFO))
-        logger.propagate = False
-
-    return logger
+    # Bind logger with name for context
+    return loguru_logger.bind(name=name or "root")
